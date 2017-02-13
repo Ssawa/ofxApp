@@ -1,0 +1,34 @@
+# There's some discussion at https://forum.openframeworks.cc/t/continuous-integration-for-addons-and-other-openframeworks/24928/5
+# about extracting these links from the addon_config.mk file's ADDON_DEPENDENCIES variable but, as of the current version of OF,
+# embedding this data there would screw up the make build process and the current ticket for this issue seems to suggest that
+# dependency versioning should be based on "username/repo" which presupposes that every addon lives in github; and while this
+# is probably true, I belligerent disagree with that assumption for my own weird philosophical reasons. Furthermore, I'm not sure
+# exactly how this would play with those cases where the addon isn't coming from a git repo but is an included addon.
+#
+# While all of these are surmountable issues, I don't really have the interest in creating the package manager solution that it
+# appears OF needs, so for now I'm perfectly happy with redefining the external dependencies into this external file. Also worth noting
+# that because of my annoying insistance of including these comments you can no longer just `cat` and pipe this file to git clone, you'll
+# need to `grep "^[^#;]"` it, as in `grep "^[^#;]" ofxApp/deps.txt | xargs -L 1 git clone --depth 1`. Oops.
+
+https://github.com/local-projects/ofxFontStash.git
+https://github.com/local-projects/ofxTuio.git
+https://github.com/local-projects/ofxJSON.git
+https://github.com/local-projects/ofxSuperLog.git
+https://github.com/local-projects/ofxAutoTexture.git
+https://github.com/local-projects/ofxMtJsonParser.git
+https://github.com/local-projects/ofxSimpleHttp.git
+https://github.com/local-projects/ofxTagSystem.git
+https://github.com/local-projects/ofxStateMachine.git
+https://github.com/local-projects/ofxAssets.git
+https://github.com/local-projects/ofxThreadSafeLog.git
+https://github.com/local-projects/ofxProgressiveTextureLoad.git
+https://github.com/local-projects/ofxTexturedObject.git
+https://github.com/local-projects/ofxMullion.git
+https://github.com/local-projects/ofxSensu.git
+https://github.com/local-projects/ofxNetwork.git
+https://github.com/local-projects/ofxGoogleAnalytics.git
+https://github.com/local-projects/ofxJsonSettings.git
+https://github.com/local-projects/ofxTimeMeasurements.git
+https://github.com/local-projects/ofxRemoteUI.git
+https://github.com/local-projects/ofxHistoryPlot.git
+https://github.com/local-projects/ofxScreenSetup.git
