@@ -16,7 +16,38 @@ vector<string> splitString(std::string value, char delim) {
     return tokens;
 }
 
-TEST (ofxAppUtils, getNewUUID) {
+
+TEST(ofxAppUtils, secondsToHumanReadable) {
+    EXPECT_EQ(secondsToHumanReadable(50, 3), "50.000 seconds");
+    
+    EXPECT_EQ(secondsToHumanReadable(155, 3), "2.583 minutes");
+    EXPECT_EQ(secondsToHumanReadable(155, 5), "2.58333 minutes");
+    
+    EXPECT_EQ(secondsToHumanReadable(8332, 3), "2.314 hours");
+    EXPECT_EQ(secondsToHumanReadable(8332, 5), "2.31444 hours");
+    
+    EXPECT_EQ(secondsToHumanReadable(234125, 3), "2.710 days");
+    EXPECT_EQ(secondsToHumanReadable(234125, 5), "2.70978 days");
+    
+    EXPECT_EQ(secondsToHumanReadable(1233452, 3), "2.039 weeks");
+    EXPECT_EQ(secondsToHumanReadable(1233452, 5), "2.03944 weeks");
+}
+
+TEST(ofxAppUtils, bytesToHumanReadable) {
+    EXPECT_EQ(bytesToHumanReadable(50, 3), "50 bytes");
+    
+    EXPECT_EQ(bytesToHumanReadable(1025, 3), "1.001 KB");
+    EXPECT_EQ(bytesToHumanReadable(1025, 5), "1.00098 KB");
+    
+    EXPECT_EQ(bytesToHumanReadable(1048979, 3), "1.000 MB");
+    EXPECT_EQ(bytesToHumanReadable(1048979, 5), "1.00038 MB");
+
+    EXPECT_EQ(bytesToHumanReadable(2073751823, 3), "1.931 GB");
+    EXPECT_EQ(bytesToHumanReadable(2073751823, 5), "1.93133 GB");
+
+}
+
+TEST(ofxAppUtils, getNewUUID) {
     vector<string> uuidSegments = splitString(getNewUUID(), '-');
     
     ASSERT_EQ(uuidSegments.size(), 5);
