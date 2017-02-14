@@ -1,0 +1,38 @@
+language: c++
+compiler: gcc
+sudo: true
+
+matrix:
+  include:
+  - os: linux
+    dist: trusty
+    sudo: required
+    env: TARGET="linux64" OF_BRANCH="master" OF_ROOT=~/openFrameworks
+    addons:
+      apt:
+        sources:
+          - ubuntu-toolchain-r-test
+        packages:
+          - gcc-4.9
+          - g++-4.9
+          - gdb
+
+  # Exclude the default build that would otherwise be generated
+  # see https://github.com/travis-ci/travis-ci/issues/1228
+  exclude:
+    - compiler: gcc
+
+install:
+  - git clone --depth=1 --branch=$OF_BRANCH https://github.com/openframeworks/openFrameworks $OF_ROOT
+  - $OF_ROOT/scripts/ci/addons/install.sh
+
+  # We build as part of the install process. We'll still build all of our examples but
+  # we'll save our run step for actually running our test suite.
+  - $OF_ROOT/addons/$(basename $TRAVIS_BUILD_DIR)/scripts/ci/addons/build.sh
+
+
+script:
+  - $OF_ROOT/addons/$(basename $TRAVIS_BUILD_DIR)/scripts/ci/addons/build.sh
+
+git:
+  depth: 10
