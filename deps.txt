@@ -7,7 +7,7 @@
 #
 # While all of these are surmountable issues, I don't really have the interest in creating the package manager solution that it
 # appears OF needs, so for now I'm perfectly happy with redefining the external dependencies into this external file. Also worth noting
-# that because of my annoying insistance of including these comments you can no longer just `cat` and pipe this file to git clone, you'll
+# that because of my annoying insistence of including these comments you can no longer just `cat` and pipe this file to git clone, you'll
 # need to `grep "^[^#;]"` it, as in `grep "^[^#;]" ofxApp/deps.txt | xargs -L 1 git clone --depth 1`. Oops.
 
 https://github.com/local-projects/ofxFontStash.git
@@ -25,10 +25,11 @@ https://github.com/local-projects/ofxProgressiveTextureLoad.git
 https://github.com/local-projects/ofxTexturedObject.git
 https://github.com/local-projects/ofxMullion.git
 https://github.com/local-projects/ofxSensu.git
-https://github.com/local-projects/ofxNetwork.git
 https://github.com/local-projects/ofxGoogleAnalytics.git
 https://github.com/local-projects/ofxJsonSettings.git
 https://github.com/local-projects/ofxTimeMeasurements.git
 https://github.com/local-projects/ofxRemoteUI.git
 https://github.com/local-projects/ofxHistoryPlot.git
 https://github.com/local-projects/ofxScreenSetup.git
+https://github.com/local-projects/ofxInterface.git
+https://github.com/armadillu/ofxAnimatable.git

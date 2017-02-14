@@ -9,7 +9,7 @@ common:
 
 	# dependencies with other addons, a list of them separated by spaces
 	# or use += in several lines
-	  ADDON_DEPENDENCIES = ofxOSC ofxXmlSettings ofxFontStash ofxTuio ofxJson ofxSuperLog ofxAutoTexture ofxMtJsonParser ofxSimpleHttp ofxTagSystem ofxStateMachine ofxAssets ofxThreadSafeLog ofxProgressiveTextureLoad ofxTexturedObject ofxOpenCV ofxMullion ofxSensu ofxNetwork ofxGoogleAnalytics ofxJsonSettings ofxTimeMeasurements ofxRemoteUI ofxHistoryPlot ofxScreenSetup ofxPoco
+	  ADDON_DEPENDENCIES = ofxOsc ofxXmlSettings ofxFontStash ofxTuio ofxJSON ofxSuperLog ofxAutoTexture ofxMtJsonParser ofxSimpleHttp ofxTagSystem ofxStateMachine ofxAssets ofxThreadSafeLog ofxProgressiveTextureLoad ofxTexturedObject ofxOpenCv ofxMullion ofxSensu ofxNetwork ofxGoogleAnalytics ofxJsonSettings ofxTimeMeasurements ofxRemoteUI ofxHistoryPlot ofxScreenSetup ofxPoco
 
 	# include search paths, this will be usually parsed from the file system
 	# but if the addon or addon libraries need special search paths they can be

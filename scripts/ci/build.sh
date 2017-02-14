@@ -40,26 +40,31 @@ elif [ "$TARGET" == "emscripten" ]; then
     source ~/emscripten-sdk/emsdk_env.sh;
 fi
 
-for example in example*; do
-    cp ${OF_ROOT}/scripts/templates/$TARGET/Makefile $example/
+# Temp comment so that we can test a little faster (hopefully if our tests build these will build too)
+# for example in example*; do
+#     cp ${OF_ROOT}/scripts/templates/$TARGET/Makefile $example/
 
-    # Won't this override any existing configs?
-    # cp ${OF_ROOT}/scripts/templates/$TARGET/config.make $example/
+#     # Won't this override any existing configs?
+#     # cp ${OF_ROOT}/scripts/templates/$TARGET/config.make $example/
 
-    # Note that we've changed DebugNoOF to ReleaseNoOF, I think testing the release build in a CI
-    # pipeline might be more appropriate, although I suppose we could do both pretty easily if we
-    # really wanted.
+#     # Right now we're only testing a Debug build but it would be nice to test a Release build aswell.
+#     # This would require downloading the Release library (as we're not actually building OF here).
+#
+#     cd $example
+#     if [ "$TARGET" == "android" ]; then
+#         echo "ABIS_TO_COMPILE_DEBUG = $OPT" >> config.make
+#         make DebugNoOF PLATFORM_OS=Android
+#     elif [ "$TARGET" == "emscripten" ]; then
+#         emmake make DebugNoOF
+#     elif [ "$TARGET" == "linuxarmv7l" ]; then
+#         make DebugNoOF PLATFORM_VARIANT=raspberry2
+#     else
+#         make DebugNoOF
+#     fi
+#     cd ..
+# done
 
-    cd $example
-    if [ "$TARGET" == "android" ]; then
-        echo "ABIS_TO_COMPILE_DEBUG = $OPT" >> config.make
-        make ReleaseNoOF PLATFORM_OS=Android
-    elif [ "$TARGET" == "emscripten" ]; then
-        emmake make ReleaseNoOF
-    elif [ "$TARGET" == "linuxarmv7l" ]; then
-        make ReleaseNoOF PLATFORM_VARIANT=raspberry2
-    else
-        make ReleaseNoOF
-    fi
-    cd ..
-done
+# Build our test suite
+cd ${OF_ROOT}/addons/$(basename $TRAVIS_BUILD_DIR)/tests
+cp ${OF_ROOT}/scripts/templates/$TARGET/Makefile .
+make DebugNoOF

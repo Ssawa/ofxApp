@@ -109,6 +109,8 @@ protected:
 		bool preloaded = false;
 		void threadedFunction(){
 			#ifdef TARGET_WIN32
+			#elif defined(TARGET_LINUX)
+			pthread_setname_np(pthread_self(), "ofxAppStaticTextures");
 			#else
 			pthread_setname_np("ofxAppStaticTextures");
 			#endif

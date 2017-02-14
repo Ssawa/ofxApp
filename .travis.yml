@@ -7,7 +7,7 @@ matrix:
   - os: linux
     dist: trusty
     sudo: required
-    env: TARGET="linux64" OF_BRANCH="master" OF_ROOT=~/openFrameworks
+    env: TARGET="linux64" OF_BRANCH="master" OF_ROOT=$HOME/openFrameworks
     addons:
       apt:
         sources:
@@ -26,13 +26,14 @@ install:
   - git clone --depth=1 --branch=$OF_BRANCH https://github.com/openframeworks/openFrameworks $OF_ROOT
   - $OF_ROOT/scripts/ci/addons/install.sh
 
-  # We build as part of the install process. We'll still build all of our examples but
-  # we'll save our run step for actually running our test suite.
-  - $OF_ROOT/addons/$(basename $TRAVIS_BUILD_DIR)/scripts/ci/addons/build.sh
+  # We build as part of the install process, which is a shift from https://github.com/openframeworks/ofxAddonTemplate.
+  #  We'll still build all of our examples but we'll save our run step for actually running our test suite.
+  - $OF_ROOT/addons/$(basename $TRAVIS_BUILD_DIR)/scripts/ci/build.sh
 
 
 script:
-  - $OF_ROOT/addons/$(basename $TRAVIS_BUILD_DIR)/scripts/ci/addons/build.sh
+  - cd $OF_ROOT/addons/$(basename $TRAVIS_BUILD_DIR)/tests
+  - $OF_ROOT/addons/$(basename $TRAVIS_BUILD_DIR)/tests/bin/tests
 
 git:
   depth: 10
