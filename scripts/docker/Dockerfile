@@ -23,11 +23,12 @@ RUN git clone --depth=1 --branch=$OF_BRANCH https://github.com/openframeworks/op
 RUN $OF_ROOT/scripts/ci/$TARGET/install.sh
 RUN $OF_ROOT/scripts/dev/download_libs.sh -a 64;
 
+# Because vi gives me a headache when I need to tweak configs
 RUN apt-get -y install nano
 
 # Docker build restricts your build context so that you can't go outside your working folder.
 # To get around this you should build with: docker build -t ofxapp -f $(REPO_PATH)/scripts/docker/Dockerfile $(REPO_PATH)
 COPY . $build_dir
 
-#RUN $OF_ROOT/scripts/ci/addons/install.sh
-#RUN $OF_ROOT/addons/$(basename $TRAVIS_BUILD_DIR)/scripts/ci/build.sh
+RUN $OF_ROOT/scripts/ci/addons/install.sh
+RUN $OF_ROOT/addons/$(basename $TRAVIS_BUILD_DIR)/scripts/ci/build.sh

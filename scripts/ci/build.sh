@@ -40,29 +40,28 @@ elif [ "$TARGET" == "emscripten" ]; then
     source ~/emscripten-sdk/emsdk_env.sh;
 fi
 
-# Temp comment so that we can test a little faster (hopefully if our tests build these will build too)
-# for example in example*; do
-#     cp ${OF_ROOT}/scripts/templates/$TARGET/Makefile $example/
+for example in example*; do
+    cp ${OF_ROOT}/scripts/templates/$TARGET/Makefile $example/
 
-#     # Won't this override any existing configs?
-#     # cp ${OF_ROOT}/scripts/templates/$TARGET/config.make $example/
+    # Won't this override any existing configs?
+    # cp ${OF_ROOT}/scripts/templates/$TARGET/config.make $example/
 
-#     # Right now we're only testing a Debug build but it would be nice to test a Release build aswell.
-#     # This would require downloading the Release library (as we're not actually building OF here).
-#
-#     cd $example
-#     if [ "$TARGET" == "android" ]; then
-#         echo "ABIS_TO_COMPILE_DEBUG = $OPT" >> config.make
-#         make DebugNoOF PLATFORM_OS=Android
-#     elif [ "$TARGET" == "emscripten" ]; then
-#         emmake make DebugNoOF
-#     elif [ "$TARGET" == "linuxarmv7l" ]; then
-#         make DebugNoOF PLATFORM_VARIANT=raspberry2
-#     else
-#         make DebugNoOF
-#     fi
-#     cd ..
-# done
+    # Right now we're only testing a Debug build but it would be nice to test a Release build aswell.
+    # This would require downloading the Release library (as we're not actually building OF here).
+
+    cd $example
+    if [ "$TARGET" == "android" ]; then
+        echo "ABIS_TO_COMPILE_DEBUG = $OPT" >> config.make
+        make DebugNoOF PLATFORM_OS=Android
+    elif [ "$TARGET" == "emscripten" ]; then
+        emmake make DebugNoOF
+    elif [ "$TARGET" == "linuxarmv7l" ]; then
+        make DebugNoOF PLATFORM_VARIANT=raspberry2
+    else
+        make DebugNoOF
+    fi
+    cd ..
+done
 
 # Build our test suite
 cd ${OF_ROOT}/addons/$(basename $TRAVIS_BUILD_DIR)/tests

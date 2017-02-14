@@ -33,7 +33,7 @@ install:
 
 script:
   - cd $OF_ROOT/addons/$(basename $TRAVIS_BUILD_DIR)/tests
-  - $OF_ROOT/addons/$(basename $TRAVIS_BUILD_DIR)/tests/bin/tests
+  - $OF_ROOT/addons/$(basename $TRAVIS_BUILD_DIR)/tests/bin/tests_debug
 
 git:
   depth: 10
