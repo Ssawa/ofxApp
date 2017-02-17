@@ -4,6 +4,9 @@
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
+#include "fff.h"
+
+#include "mocks/glew.h"
 
 #include "ofMain.h"
 #include "ofAppNoWindow.h"
@@ -16,6 +19,7 @@
 // USE_OFX_FONTSTASH
 // USE_OFX_HISTORYPLOT
 
+DEFINE_FFF_GLOBALS;
 
 GTEST_API_ int main(int argc, char **argv) {
 	printf("Running ofxApp test suite\n");
