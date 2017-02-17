@@ -132,15 +132,12 @@ TEST(ofxAppUtils, getGLError) {
 }
 
 TEST(ofxAppUtils, isValidEmail) {
-    EXPECT_TRUE("atestemail@localhost.edu");
-    EXPECT_TRUE("lot2!a+2@localh_ost.carl");
+    EXPECT_TRUE(isValidEmail("atestemail@localhost.edu"));
+    EXPECT_TRUE(isValidEmail("lot2!a+2@localh_ost.carl"));
     
-    // THESE DO FAIL BUT SHOULDN'T. COMMENTING FOR DEMO PURPOSES ONLY
-    /*
-    EXPECT_FALSE("hiya");
-    EXPECT_FALSE("yo@hi");
-    EXPECT_FALSE("y o@hi.com");
-    */
+    EXPECT_FALSE(isValidEmail("hiya"));
+    EXPECT_FALSE(isValidEmail("yo@hi"));
+    EXPECT_FALSE(isValidEmail("y o@hi.com"));
 }
 
 TEST(ofxAppUtils, getImageDimensions) {

@@ -6,8 +6,6 @@
 #include "gmock/gmock.h"
 #include "fff.h"
 
-#include "mocks/glew.h"
-
 #include "ofMain.h"
 #include "ofAppNoWindow.h"
 
