@@ -3,9 +3,12 @@
 #include "ofxAppUtils.h"
 #include "GL/glew.h"
 #include "mocks/glew.h"
-#include "mocks/ofAppWindowMock.h"
+
+#include "ofAppNoWindow.h"
 
 using namespace ofxApp::utils;
+
+
 
 vector<string> splitString(std::string value, char delim) {
     std::stringstream ss(value);
@@ -30,6 +33,13 @@ TEST(ofxAppUtils, haltAndListen) {
 }
 
 TEST(ofxAppUtils, haltAndListenEarlyExit) {
+	
+	class ofAppNoWindowAlwaysClose : public ofAppNoWindow {
+		virtual bool getWindowShouldClose() {
+			return true;
+		}
+	};
+	
 	auto originalWindow = ofGetMainLoop()->getCurrentWindow();
 	auto dummyWindow = shared_ptr<ofAppNoWindowAlwaysClose>(new ofAppNoWindowAlwaysClose());
 	dummyWindow->setup(ofWindowSettings());
