@@ -24,6 +24,9 @@ namespace ofxApp{
 		};
 
 		void assertFileExists(const string & path);
+		
+		int haltAndListen(float secondsOnScreen);
+		
 		void terminateApp(const string & module, const string & reason, float secondsOnScreen = 15);
 				
 		ofColor createHsbColor(float h, float sat, float brightness); //[0..255.0f]

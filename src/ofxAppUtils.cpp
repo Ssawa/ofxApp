@@ -26,7 +26,27 @@ namespace utils{
 			//ofLogNotice("ofxApp") << "Confirmed asset is present: '" << path << "'";
 		}
 	}
-
+	
+	int haltAndListen(float secondsOnScreen) {
+		if(ofGetWindowPtr()){
+			auto end = std::chrono::system_clock::now() + std::chrono::milliseconds(int(secondsOnScreen * 1000));
+			while(std::chrono::system_clock::now() < end) {
+				ofSetupScreen();
+				ofClear(0,0,0,255);
+				ofxSuperLog::getLogger()->getDisplayLogger().draw(ofGetWidth(), ofGetHeight());
+				ofGetMainLoop()->pollEvents();
+				if(ofGetWindowPtr()->getWindowShouldClose()){
+					ofLogFatalError("ofxApp") << "Quitting by user action";
+					return -1;
+				}
+				ofGetWindowPtr()->swapBuffers();
+				ofSleepMillis(16); // Should give us ~60fps
+			}
+		}
+		
+		return 0;
+	}
+	
 	void terminateApp(const string & module, const string & reason, float secondsOnScreen){
 		
 		ofLogFatalError("ofxApp") << "terminateApp()!";
@@ -44,24 +64,12 @@ namespace utils{
 		if(ofxApp::get().isWindowSetup()){
 			ofxSuperLog::getLogger()->setScreenLoggingEnabled(true); //show log if json error
 			ofxSuperLog::getLogger()->getDisplayLogger().setPanelWidth(1.0);
-			int numFrames = secondsOnScreen * 1000 / 16; //stay up a bit so that you can read logs on screen
 			
 			OFXAPP_REPORT("ofxAppTerminate_" + module, reason, 2);
-			
-			//hijack OF and refresh screen & events by hand at ~60fps
-			if(ofGetWindowPtr()){
-				for(int i = 0; i < numFrames; i++ ){
-					ofSetupScreen();
-					ofClear(0,0,0,255);
-					ofxSuperLog::getLogger()->getDisplayLogger().draw(ofGetWidth(), ofGetHeight());
-					ofGetMainLoop()->pollEvents();
-					if(ofGetWindowPtr()->getWindowShouldClose()){
-						ofLogFatalError("ofxApp") << "Quitting by user action";
-						std::exit(-1);
-					}
-					ofGetWindowPtr()->swapBuffers();
-					ofSleepMillis(16);
-				}
+
+			int status = haltAndListen(secondsOnScreen);
+			if (status != 0) {
+				std::exit(status);
 			}
 		}else{
 			ofLogFatalError("ofxApp") << "Terminating ofxApp before the app window is setup.";

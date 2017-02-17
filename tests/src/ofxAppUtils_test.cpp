@@ -3,6 +3,7 @@
 #include "ofxAppUtils.h"
 #include "GL/glew.h"
 #include "mocks/glew.h"
+#include "mocks/ofAppWindowMock.h"
 
 using namespace ofxApp::utils;
 
@@ -16,6 +17,34 @@ vector<string> splitString(std::string value, char delim) {
     return tokens;
 }
 
+
+
+TEST(ofxAppUtils, haltAndListen) {
+	auto start = std::chrono::system_clock::now();
+	float sleepAmount = .2;
+	haltAndListen(sleepAmount);
+	auto stop = std::chrono::system_clock::now();
+	std::chrono::duration<double> diff = stop - start;
+	EXPECT_GE(diff.count(), sleepAmount);
+	EXPECT_LT(diff.count(), sleepAmount + .2); // This is kind of fuzzy. Our calculation obviously won't be exactly .5 but how much leeway can we give it while also assuring that we're not seeing a logical error?
+}
+
+TEST(ofxAppUtils, haltAndListenEarlyExit) {
+	auto originalWindow = ofGetMainLoop()->getCurrentWindow();
+	auto dummyWindow = shared_ptr<ofAppNoWindowAlwaysClose>(new ofAppNoWindowAlwaysClose());
+	dummyWindow->setup(ofWindowSettings());
+	ofGetMainLoop()->setCurrentWindow(dummyWindow);
+	
+	auto start = std::chrono::system_clock::now();
+	float sleepAmount = 100;
+	haltAndListen(sleepAmount);
+	auto stop = std::chrono::system_clock::now();
+	std::chrono::duration<double> diff = stop - start;
+	EXPECT_LT(diff.count(), .2);
+	
+	ofGetMainLoop()->setCurrentWindow(originalWindow);
+	dummyWindow.reset();
+}
 
 TEST(ofxAppUtils, secondsToHumanReadable) {
     EXPECT_EQ(secondsToHumanReadable(50, 3), "50.000 seconds");
