@@ -141,6 +141,8 @@ TEST(ofxAppUtils, getGLError) {
     RESET_FAKE(glGetError);
 }
 
+// Apparently the linux standard library does not fully support regex
+#ifndef TARGET_LINUX
 TEST(ofxAppUtils, isValidEmail) {
     EXPECT_TRUE(isValidEmail("atestemail@localhost.edu"));
     EXPECT_TRUE(isValidEmail("lot2!a+2@localh_ost.carl"));
@@ -149,6 +151,7 @@ TEST(ofxAppUtils, isValidEmail) {
     EXPECT_FALSE(isValidEmail("yo@hi"));
     EXPECT_FALSE(isValidEmail("y o@hi.com"));
 }
+#endif
 
 TEST(ofxAppUtils, getImageDimensions) {
     ofDisableDataPath();
