@@ -9,10 +9,12 @@
 #include "ofAppNoWindow.h"
 
 
-#define OFXAPP_TESTING
-#define TARGET_NODISPLAY
-#define USE_OFX_FONTSTASH
-#define USE_OFX_HISTORYPLOT
+// The following should be defined during the build process
+//
+// OFXAPP_TESTING
+// TARGET_NODISPLAY
+// USE_OFX_FONTSTASH
+// USE_OFX_HISTORYPLOT
 
 
 GTEST_API_ int main(int argc, char **argv) {
