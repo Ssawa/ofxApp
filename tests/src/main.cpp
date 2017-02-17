@@ -9,17 +9,13 @@
 #include "ofAppNoWindow.h"
 
 
-// The following should be defined during the build process
-//
-// OFXAPP_TESTING
-// TARGET_NODISPLAY
-// USE_OFX_FONTSTASH
-// USE_OFX_HISTORYPLOT
+#define OFXAPP_TESTING
+#define TARGET_NODISPLAY
+#define USE_OFX_FONTSTASH
+#define USE_OFX_HISTORYPLOT
 
 
 GTEST_API_ int main(int argc, char **argv) {
-	#ifdef TARGET_NODISPLAY
-	
 	printf("Running ofxApp test suite\n");
 	::testing::InitGoogleMock(&argc, argv);
 	
@@ -40,8 +36,4 @@ GTEST_API_ int main(int argc, char **argv) {
 	window->setup(ofWindowSettings());
 	
 	return RUN_ALL_TESTS();
-	#else
-	printf("Your preprocessors are incorrect.");
-	exit(1);
-	#endif
 }
