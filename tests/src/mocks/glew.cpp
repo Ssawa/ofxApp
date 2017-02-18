@@ -9,6 +9,10 @@
 // use it when we need it
 #ifdef OFXAPP_TESTING
 
-DEFINE_FAKE_VALUE_FUNC(GLenum GLAPIENTRY, glGetError);
+DEFINE_FAKE_VALUE_FUNC(GLenum, glGetError);
+DEFINE_FAKE_VOID_FUNC(glGenTextures, GLsizei, GLuint*);
 
+
+// Decleration for our funky GLEW calls
+DEFINE_FAKE_VOID_FUNC(mockGlBeginQuery, GLenum, GLuint);
 #endif
