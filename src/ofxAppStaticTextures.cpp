@@ -16,12 +16,14 @@ string ofxAppStaticTextures::filenameHintMipMap = "_mip";
 ofxAppStaticTextures::ofxAppStaticTextures(){
 }
 
-void ofxAppStaticTextures::setup(){
+bool ofxAppStaticTextures::setup(){
 	if(!missingTex.isAllocated()){
 		missingTex.allocate(16,16,GL_RGBA);
 		ofAddListener(ofEvents().update, this, &ofxAppStaticTextures::onUpdate);
+		return true;
 	}else{
 		ofLogError("ofxAppStaticTextures") << "Already setup! Trying to setup twice?!";
+		return false;
 	}
 }
 

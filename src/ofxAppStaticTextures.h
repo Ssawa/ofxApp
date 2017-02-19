@@ -66,7 +66,7 @@ public:
 	static string filenameHintTex2D;
 	static string filenameHintMipMap;
 
-	void setup();
+	bool setup();
 
 	ofxAppStaticTextures();
 

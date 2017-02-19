@@ -3,8 +3,9 @@
 #include "mocks/glew.h"
 
 TEST(ofxAppStaticTextures, testing123) {
-	glBeginQuery = &mockGlBeginQuery;
-	glBeginQuery(GL_TIME_ELAPSED_EXT, 0);
-	//ofxAppStaticTextures staticTextures;
-	//staticTextures.setup();
+	ofxAppStaticTextures staticTextures;
+	
+	EXPECT_TRUE(staticTextures.setup());
+	
+	EXPECT_FALSE(staticTextures.setup());
 }
