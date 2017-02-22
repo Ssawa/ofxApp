@@ -8,6 +8,7 @@
 #include "of3dGraphics.h"
 
 class MockRenderer : public ofBaseRenderer {
+public:
 	MOCK_METHOD0(getType, const string &());
 	MOCK_METHOD0(startRender, void());
 	MOCK_METHOD0(finishRender, void());
